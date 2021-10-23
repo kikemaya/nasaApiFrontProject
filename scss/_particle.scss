@@ -1,0 +1,103 @@
+/* ---- particles.js container ---- */
+.hero-bg {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(
+        to left,
+        rgba(0, 0, 0,0.6),
+        rgba(0,0,0,0.6)
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    #back-1 {
+        background: url('../img/back1.jpg');
+        
+    }
+    #back-2 {
+        background: url('../img/back2.jpg');
+        animation: changeBack 20s linear 20s infinite;
+    }
+    #back-3 {
+        background: url('../img/back3.jpg');
+        animation: changeBack 20s linear 0s infinite;
+    }
+    #back-1, #back-2, #back-3 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0,0.9);
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        // animation: changeBack 10s;
+    }
+    &__logo {
+        height: 70px;
+        position: absolute;
+    }
+    &__astronaut-img {
+        height: 300px!important;
+        position: absolute;
+        perspective: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: floating 20s infinite alternate;
+    }
+    &__hero {
+        position: absolute;
+        width: 60%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @include small-max {
+            width: 90%;
+        }
+        h1 {
+            align-self: flex-start;
+            font-family: font(primary), sans-serif;
+        }
+        &__container-date-search {
+            width: 100%;
+            label {
+                font-size: 1.4rem;
+                color: white;
+                span {
+                    font-size: 1.2rem;
+                    font-style: italic;
+                }
+            }
+        }
+    }
+    &__vertical-text {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(44%, -50%) rotate(-90DEG);
+        color: darken(yellow, 10%);
+        font-weight: bold;
+        font-style: italic;
+        @include small-max {
+            display: none;
+        }
+    }
+    &__footer {
+        position: absolute;
+        bottom: 0;
+        color: white;
+        p {
+            font-style: italic;
+        }
+
+    }
+}
+
