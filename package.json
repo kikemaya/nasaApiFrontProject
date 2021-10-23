@@ -1,7 +1,7 @@
 {
   "name": "nasa-api-front-project",
   "version": "0.0.0",
-  "description": "This is just another NASA API project. I've to practice, right?\u001b[1;3D\u001b[C",
+  "description": "This is just another NASA API project. I've to practice, right?",
   "main": "bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
