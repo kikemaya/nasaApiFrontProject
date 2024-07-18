@@ -7,9 +7,9 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"lint": "npx @biomejs/biome lint --write .",
-		"format": "npx @biomejs/biome format --write .",
-		"check": "npx @biomejs/biome check --write ."
+		"lint": "npx @biomejs/biome lint --write ./src",
+		"format": "npx @biomejs/biome format --write ./src",
+		"check": "npx @biomejs/biome check --write ./src"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
