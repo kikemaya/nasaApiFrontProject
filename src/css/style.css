@@ -216,17 +216,17 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 }
 
 .hero-bg #back-1 {
-  background: url("../img/back1.jpg");
+  background: url("/img/back1.jpg");
 }
 
 .hero-bg #back-2 {
-  background: url("../img/back2.jpg");
+  background: url("/img/back2.jpg");
   -webkit-animation: changeBack 20s linear 20s infinite;
           animation: changeBack 20s linear 20s infinite;
 }
 
 .hero-bg #back-3 {
-  background: url("../img/back3.jpg");
+  background: url("/img/back3.jpg");
   -webkit-animation: changeBack 20s linear 0s infinite;
           animation: changeBack 20s linear 0s infinite;
 }
@@ -335,4 +335,3 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 .hero-bg__footer p {
   font-style: italic;
 }
-/*# sourceMappingURL=main.css.map */
