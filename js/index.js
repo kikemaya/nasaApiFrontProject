@@ -1,7 +1,5 @@
 'use strict';
 
-const axios = require('axios');
-
 const API_KEY = "jIOX3aArf0zAYvUK9xkKaaGGqCjChycgiLnl9Cgh";
 
 // API HTML SELECTIONS
@@ -20,20 +18,23 @@ const btnShowModal = document.querySelector('.show-modal');
 showInfo.addEventListener('click', () => {
   loadInfo();
 })
-function loadInfo() {
+async function loadInfo() {
   const dateInput = document.querySelector('#date-input').value
-  axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${dateInput}&start_date=&end_date=&count=&thumbs`)
-  .then(function (response) {
-    const title = response.data.title;
-    const img = response.data.hdurl;
-    const explanation = response.data.explanation;
+  
+  try {
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${dateInput}&start_date=&end_date=&count=&thumbs`);
+    const data = await response.json();
+
+    const title = data.title;
+    const img = data.hdurl;
+    const explanation = data.explanation;
     showData(title, img, explanation);
-  })
-  .catch(function (error) {
+  } catch (error) {
     // handle error
     showErr();
-    console.log(error);
-  })
+    console.error(error);
+  }
+
  }
 function showData(title, img, explanation) {
   titleDom.classList.remove('alert', 'alert-danger');
