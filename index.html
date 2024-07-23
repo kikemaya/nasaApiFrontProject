@@ -18,65 +18,74 @@
   <body>
     <!-- particles.js container -->
     <div id="particles-js" class="hero-bg">
-      <div id="back-1"></div>
-      <div id="back-2"></div>
-      <div id="back-3"></div>
+      <div class="hero-bg__back hero-bg__back--1"></div>
+      <div class="hero-bg__back hero-bg__back--2"></div>
+      <div class="hero-bg__back hero-bg__back--3"></div>
 
-      <a href="">
-        <img class="hero-bg__logo m-3 mt-4 m-md-5" src="/img/logo.png" alt="" />
+      <a href="https://api.nasa.gov/" target="_blank">
+        <img
+          class="hero-bg__logo m-3 mt-4 m-md-5"
+          src="/img/logo.png"
+          alt="Nasa logo"
+        />
       </a>
-      <img class="hero-bg__astronaut-img" src="/img/astronaut.png" alt="" />
+      <img
+        class="hero-bg__astronaut-img"
+        src="/img/astronaut.png"
+        alt="
+      Astronaut floating in space"
+      />
 
       <section class="hero-bg__hero">
-        <h1>
-          LET'S SEE THE ASTRONOMY<br />
-          PICTURE OF THE DAY!
+        <h1 class="hero-bg__hero-title">
+          Explore The Astronomy<br />
+          Picture Of The Day!
         </h1>
         <div class="hero-bg__hero__container-date-search">
-          <label for="date-input"
-            >please, enter a date
-            <span>(the current date is set by default)</span>:</label
-          >
+          <label class="hero-bg__label my-2" for="date-input">
+            Please enter a date
+            <span class="hero-bg__label-span"
+              >(The current date is set by default)</span
+            >:
+          </label>
           <input
             type="date"
-            class="mt-2 mb-4"
+            class="hero-bg__input mt-2 mb-4"
             name=""
             id="date-input"
             value=""
           />
-          <button class="btn btn-primary btn-lg show-modal" id="showInfo">
+          <button
+            class="hero-bg__button btn btn-primary btn-lg show-modal"
+            id="showInfo"
+          >
             Consult
           </button>
         </div>
       </section>
 
       <article class="hero-bg__vertical-text">
-        <p class="m-0">
+        <p class="hero-bg__vertical-text-content m-0">
           “At NASA, we make Air and Space available for everyone”.
         </p>
       </article>
 
       <footer class="hero-bg__footer mx-5">
-        <p>Website made with 💖 by Enrique Maya.</p>
+        <p class="hero-bg__footer-content">
+          Website made with 💖 by Enrique Maya.
+        </p>
       </footer>
     </div>
 
-    <div class="modal-con p-4 p-md-5 hidden overflow-auto">
-      <button class="modal-con__close mb-3">&times;</button>
-      <br />
-      <h2 id="title" class="mt-5">Title</h2>
-      <div class="modal-con__info d-flex justify-content-around flex-wrap">
-        <img
-          src=""
-          id="img"
-          class="my-lg-5 my-4"
-          alt="There is no available image"
-        />
-        <article class="mt-lg-5 mt-1 mx-lg-3">
-          <h3>Explanation:</h3>
-          <br />
-          <p id="explanation">Explanation</p>
-        </article>
+    <div class="modal-con p-4 p-md-5 hidden overflow-auto container-fluid">
+      <button class="modal-con__close">&times;</button>
+      <h2 id="title">Title</h2>
+      <div class="modal-con__info">
+        <div class="modal-con__image my-5" id="img"></div>
+        <div class="modal-con__text">
+          <h3 class="modal-con__text-title">Explanation:</h3>
+          <p class="modal-con__text-content" id="explanation">Explanation</p>
+        </div>
       </div>
     </div>
     <div class="overlay-mod hidden"></div>

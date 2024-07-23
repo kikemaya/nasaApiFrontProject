@@ -1,6 +1,7 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-particlesJS("particles-js", {
+// ParticlesJS configuration
+const particlesConfig = {
 	particles: {
 		number: { value: 180, density: { enable: true, value_area: 500 } },
 		color: { value: "#ffffff" },
@@ -8,7 +9,6 @@ particlesJS("particles-js", {
 			type: "circle",
 			stroke: { width: 0, color: "#000000" },
 			polygon: { nb_sides: 5 },
-			// "image": { "src": "img/github.svg", "width": 100, "height": 100 }
 		},
 		opacity: {
 			value: 1,
@@ -54,80 +54,102 @@ particlesJS("particles-js", {
 		},
 	},
 	retina_detect: true,
-});
+};
 
-// API HTML SELECTIONS
-const showInfo = document.querySelector("#showInfo");
-const titleDom = document.querySelector("#title");
-const imgDom = document.querySelector("#img");
-const explanationDom = document.querySelector("#explanation");
+particlesJS("particles-js", particlesConfig);
 
-// MODAL SELECTIONS
-const modal = document.querySelector(".modal-con");
-const overlay = document.querySelector(".overlay-mod");
-const btnCloseModal = document.querySelector(".modal-con__close");
-const btnShowModal = document.querySelector(".show-modal");
+// DOM selections
+const elements = {
+	showInfo: document.querySelector("#showInfo"),
+	titleDom: document.querySelector("#title"),
+	imgDom: document.querySelector("#img"),
+	explanationDom: document.querySelector("#explanation"),
+	modal: document.querySelector(".modal-con"),
+	overlay: document.querySelector(".overlay-mod"),
+	btnCloseModal: document.querySelector(".modal-con__close"),
+	btnShowModal: document.querySelector(".show-modal"),
+	dateInput: document.querySelector("#date-input"),
+};
 
-//API FUNCTIONS
-showInfo.addEventListener("click", () => {
-	loadInfo();
-});
-async function loadInfo() {
-	const dateInput = document.querySelector("#date-input").value;
+// Event listeners
+const addEventListeners = () => {
+	elements.showInfo.addEventListener("click", loadInfo);
+	elements.btnShowModal.addEventListener("click", toggleModal);
+	elements.btnCloseModal.addEventListener("click", toggleModal);
+	elements.overlay.addEventListener("click", toggleModal);
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape" && !elements.modal.classList.contains("hidden")) {
+			toggleModal();
+		}
+	});
+};
+
+const toggleModal = () => {
+	elements.modal.classList.toggle("hidden");
+	elements.overlay.classList.toggle("hidden");
+};
+
+const loadInfo = async () => {
+	const dateInput = elements.dateInput.value;
 
 	try {
+		elements.imgDom.innerHTML = `<img src="https://technometrics.net/wp-content/uploads/2020/11/loading-icon-animated-gif-19-1.gif" alt="loading..." />`;
 		const response = await fetch(
-			`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${dateInput}&start_date=&end_date=&count=&thumbs`,
+			`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${dateInput}`,
 		);
 		const data = await response.json();
-
-		const title = data.title;
-		const img = data.hdurl;
-		const explanation = data.explanation;
-		showData(title, img, explanation);
+		showData(data.title, data.hdurl || data.url, data.explanation);
 	} catch (error) {
-		// handle error
 		showErr();
-		console.error(error);
+		console.error("Error loading data:", error);
 	}
-}
-function showData(title, img, explanation) {
-	titleDom.classList.remove("alert", "alert-danger");
-	explanationDom.classList.remove("error-text");
-	titleDom.classList.add("alert", "alert-info");
-	titleDom.textContent = title;
-	imgDom.src = img;
-	explanationDom.textContent = explanation;
-}
-function showErr() {
-	titleDom.classList.add("alert", "alert-danger");
-	titleDom.textContent = "Oops!. Houston, we've had a problem here.";
-	// imgDom.src = "../img/errorImg.jpg";
-	imgDom.src =
-		"https://image.freepik.com/free-vector/404-error-design-with-astronaut_23-2147734936.jpg";
-	explanationDom.classList.add("error-text");
-	explanationDom.textContent =
-		"No information available. Please, search again with another date.";
-}
-
-//MODAL FUNCTIONS
-const openModal = () => {
-	modal.classList.remove("hidden");
-	overlay.classList.remove("hidden");
-};
-const closeModal = () => {
-	modal.classList.add("hidden");
-	overlay.classList.add("hidden");
 };
 
-btnShowModal.addEventListener("click", openModal);
+const showData = (title, mediaUrl, explanation) => {
+	elements.titleDom.className = "modal-con__title alert alert-info";
+	elements.titleDom.textContent = title;
 
-btnCloseModal.addEventListener("click", closeModal);
+	const mediaType = mediaUrl.match(/\.(jpeg|jpg|gif|png)$/)
+		? "image"
+		: mediaUrl.includes("youtube.com")
+			? "video"
+			: "unknown";
 
-overlay.addEventListener("click", closeModal);
-
-document.addEventListener("keydown", (e) => {
-	if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-		closeModal();
+	switch (mediaType) {
+		case "image":
+			elements.imgDom.innerHTML = `<img src="${mediaUrl}" alt="${title}" />`;
+			break;
+		case "video":
+			const videoId = getYouTubeVideoId(mediaUrl);
+			elements.imgDom.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+			break;
+		default:
+			elements.imgDom.innerHTML = `<img src="https://image.freepik.com/free-vector/404-error-design-with-astronaut_23-2147734936.jpg" alt="404 Resource Not Found." />`;
 	}
+
+	elements.explanationDom.textContent = explanation;
+};
+
+const showErr = () => {
+	elements.titleDom.className = "alert alert-danger";
+	elements.titleDom.textContent = "Oops! Houston, we've had a problem.";
+	elements.imgDom.innerHTML =
+		'<img src="https://image.freepik.com/free-vector/404-error-design-with-astronaut_23-2147734936.jpg" alt="404 Resource Not Found." />';
+	elements.explanationDom.className = "error-text";
+	elements.explanationDom.textContent =
+		"An unknown error has occurred. Please try again or set a different date.";
+};
+
+const getYouTubeVideoId = (url) => {
+	const match = url.match(
+		/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+	);
+	return match ? match[1] : null;
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+	const today = new Date();
+	const formattedDate = today.toISOString().split("T")[0];
+	elements.dateInput.value = formattedDate;
+	addEventListeners();
 });
