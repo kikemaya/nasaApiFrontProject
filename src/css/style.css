@@ -4,8 +4,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -34,8 +33,7 @@ input[type="date"] {
 input[type="date"]:focus {
   outline: none;
   border-color: #3acfff;
-  -webkit-box-shadow: 0 0 0 0.25rem rgba(0, 120, 250, 0.1);
-          box-shadow: 0 0 0 0.25rem rgba(0, 120, 250, 0.1);
+  box-shadow: 0 0 0 0.25rem rgba(0, 120, 250, 0.1);
 }
 
 ::-webkit-datetime-edit-month-field:hover,
@@ -62,7 +60,6 @@ input[type="date"]:focus {
   bottom: 0;
   opacity: 0;
   cursor: pointer;
-  color: #0078fa;
   background: #0078fa;
 }
 
@@ -83,25 +80,16 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
   font-weight: lighter;
 }
 
-@media (max-width: 576px) {
-  .error-text {
-    font-size: 1.5rem;
-  }
-}
-
-/* CLASSES TO MAKE MODAL WORK */
 .modal-con {
   position: absolute;
   width: 90%;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   line-height: 1.5;
   background-color: #FAF9F6;
   border-radius: 5px;
-  -webkit-box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
   height: 90vh;
   color: #232741;
@@ -120,31 +108,13 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 }
 
 .modal-con__title {
- font-family: "Audiowide", sans-serif;
- margin-top: 45px!important;
+  font-family: "Audiowide", sans-serif;
+  margin-top: 45px!important;
 }
 
 .modal-con__info img {
   width: 45%;
   box-shadow: 5px 5px 7px 2px rgba(0, 0, 0, 0.35);
-  -webkit-box-shadow: 5px 5px 7px 2px rgba(0, 0, 0, 0.35);
-  -moz-box-shadow: 5px 5px 7px 2px rgba(0, 0, 0, 0.35);
-}
-
-@media (max-width: 992px) {
-  .modal-con__info img {
-    width: 100%;
-  }
-}
-
-.modal-con__info article {
-  width: 45%;
-}
-
-@media (max-width: 992px) {
-  .modal-con__info article {
-    width: 100%;
-  }
 }
 
 .overlay-mod {
@@ -154,58 +124,10 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   z-index: 5;
 }
 
-@-webkit-keyframes floating {
-  from {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
-            transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
-  }
-  to {
-    -webkit-transform: translate(-50%, -50%) rotate(720deg) scale(2);
-            transform: translate(-50%, -50%) rotate(720deg) scale(2);
-  }
-}
-
-@keyframes floating {
-  from {
-    -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
-            transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
-  }
-  to {
-    -webkit-transform: translate(-50%, -50%) rotate(720deg) scale(2);
-            transform: translate(-50%, -50%) rotate(720deg) scale(2);
-  }
-}
-
-@-webkit-keyframes changeBack {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes changeBack {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* ---- particles.js container ---- */
 .hero-bg {
   overflow: hidden;
   position: relative;
@@ -225,13 +147,13 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 .hero-bg__back--2 {
   background: url("/img/back2.jpg");
   -webkit-animation: changeBack 20s linear 20s infinite;
-          animation: changeBack 20s linear 20s infinite;
+  animation: changeBack 20s linear 20s infinite;
 }
 
 .hero-bg__back--3 {
   background: url("/img/back3.jpg");
   -webkit-animation: changeBack 20s linear 0s infinite;
-          animation: changeBack 20s linear 0s infinite;
+  animation: changeBack 20s linear 0s infinite;
 }
 
 .hero-bg__back--1,
@@ -254,14 +176,11 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
 .hero-bg__astronaut-img {
   height: 300px !important;
   position: absolute;
-  -webkit-perspective: 10px;
-          perspective: 10px;
+  perspective: 10px;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-animation: floating 20s infinite alternate;
-          animation: floating 20s infinite alternate;
+  transform: translate(-50%, -50%);
+  animation: floating 20s infinite alternate;
 }
 
 .hero-bg__hero {
@@ -288,15 +207,8 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
           align-items: start;
 }
 
-@media (max-width: 576px) {
-  .hero-bg__hero {
-    width: 90%;
-  }
-}
-
 .hero-bg__hero h1 {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
+  align-self: flex-start;
   font-family: "Audiowide", sans-serif;
 }
 
@@ -318,17 +230,10 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
   position: absolute;
   right: 0;
   top: 50%;
-  -webkit-transform: translate(44%, -50%) rotate(-90deg);
-          transform: translate(44%, -50%) rotate(-90deg);
+  transform: translate(44%, -50%) rotate(-90deg);
   color: #cccc00;
   font-weight: bold;
   font-style: italic;
-}
-
-@media (max-width: 576px) {
-  .hero-bg__vertical-text {
-    display: none;
-  }
 }
 
 .hero-bg__footer {
@@ -341,17 +246,39 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
   font-style: italic;
 }
 
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
-  margin: 20px auto; /* Ajusta el margen según sea necesario */
+@keyframes changeBack {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes floating {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(720deg) scale(2);
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-bg__vertical-text {
+    display: none;
+  }
+  .error-text {
+    font-size: 1.5rem;
+  }
+  .hero-bg__hero {
+    width: 90%;
+  }
+}
+
+@media (max-width: 992px) {
+  .modal-con__info img,
+  .modal-con__info article {
+    width: 100%;
+  }
 }

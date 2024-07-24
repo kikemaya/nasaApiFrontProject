@@ -1,5 +1,9 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+// Images importation
+import loadingIcon from "/img/loadingIcon.gif";
+import notFoundImg from "/img/notFoundImg.jpg";
+
 // ParticlesJS configuration
 const particlesConfig = {
 	particles: {
@@ -77,6 +81,7 @@ const addEventListeners = () => {
 	elements.btnShowModal.addEventListener("click", toggleModal);
 	elements.btnCloseModal.addEventListener("click", toggleModal);
 	elements.overlay.addEventListener("click", toggleModal);
+
 	document.addEventListener("keydown", (e) => {
 		if (e.key === "Escape" && !elements.modal.classList.contains("hidden")) {
 			toggleModal();
@@ -93,7 +98,7 @@ const loadInfo = async () => {
 	const dateInput = elements.dateInput.value;
 
 	try {
-		elements.imgDom.innerHTML = `<img src="https://technometrics.net/wp-content/uploads/2020/11/loading-icon-animated-gif-19-1.gif" alt="loading..." />`;
+		elements.imgDom.innerHTML = `<img src="${loadingIcon}" alt="loading..." />`;
 		const response = await fetch(
 			`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${dateInput}`,
 		);
@@ -120,21 +125,22 @@ const showData = (title, mediaUrl, explanation) => {
 			elements.imgDom.innerHTML = `<img src="${mediaUrl}" alt="${title}" />`;
 			break;
 		case "video":
-			const videoId = getYouTubeVideoId(mediaUrl);
-			elements.imgDom.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+			{
+				const videoId = getYouTubeVideoId(mediaUrl);
+				elements.imgDom.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+			}
 			break;
 		default:
-			elements.imgDom.innerHTML = `<img src="https://image.freepik.com/free-vector/404-error-design-with-astronaut_23-2147734936.jpg" alt="404 Resource Not Found." />`;
+			elements.imgDom.innerHTML = `<img src="${notFoundImg}" alt="404 Resource Not Found." />`;
 	}
 
 	elements.explanationDom.textContent = explanation;
 };
 
 const showErr = () => {
-	elements.titleDom.className = "alert alert-danger";
+	elements.titleDom.className = "modal-con__title alert alert-danger";
 	elements.titleDom.textContent = "Oops! Houston, we've had a problem.";
-	elements.imgDom.innerHTML =
-		'<img src="https://image.freepik.com/free-vector/404-error-design-with-astronaut_23-2147734936.jpg" alt="404 Resource Not Found." />';
+	elements.imgDom.innerHTML = `<img src="${notFoundImg}" alt="404 Resource Not Found." />`;
 	elements.explanationDom.className = "error-text";
 	elements.explanationDom.textContent =
 		"An unknown error has occurred. Please try again or set a different date.";
